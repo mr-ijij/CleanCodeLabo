@@ -17,3 +17,21 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
+
+# storage関連
+/storage/*.php
+/storage/framework/cache/*
+/storage/framework/sessions/*
+/storage/framework/views/*
+/storage/logs/*
+/storage/tmp/*
+/storage/.bref
+/storage/storage/framework/views/*.php
+
+# 以下の行を追加して、空のディレクトリを維持
+!/storage/framework/cache/.gitignore
+!/storage/framework/sessions/.gitignore
+!/storage/framework/views/.gitignore
+!/storage/logs/.gitignore
+!/storage/tmp/.gitignore
+!/storage/framework/views/.gitignore
