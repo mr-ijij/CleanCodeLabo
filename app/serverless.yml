@@ -4,6 +4,28 @@ provider:
     name: aws
     runtime: provided.al2
     region: ap-northeast-1
+    environment:
+        FILESYSTEM_DISK: s3
+        AWS_BUCKET: ${self:custom.bucket}
+        APP_STORAGE: /tmp/storage
+        BOOTSTRAP_CACHE_PATH: /tmp/bootstrap/cache
+        APP_DEBUG: true
+        APP_SERVICES_CACHE: /tmp/services.php
+        APP_PACKAGES_CACHE: /tmp/packages.php
+        APP_CONFIG_CACHE: /tmp/config.php
+        APP_ROUTES_CACHE: /tmp/routes.php
+        APP_EVENTS_CACHE: /tmp/events.php
+    iam:
+        role:
+            statements:
+                - Effect: Allow
+                  Action: s3:*
+                  Resource:
+                    - !Sub 'arn:aws:s3:::${self:custom.bucket}'
+                    - !Sub 'arn:aws:s3:::${self:custom.bucket}/*'
+
+custom:
+    bucket: clean-code-app-bucket
 
 plugins:
     - ./vendor/bref/bref
@@ -24,6 +46,13 @@ functions:
             - ${bref:layer.php-81}
             - ${bref:layer.console}
 
+resources:
+    Resources:
+        Storage:
+            Type: AWS::S3::Bucket
+            Properties:
+                BucketName: ${self:custom.bucket}
+
 package:
     patterns:
         - '!node_modules/**'
@@ -34,3 +63,4 @@ package:
         - '!.env'
         - '!.env.*'
         - '!.git/**'
+        - 'vendor/**'
