@@ -9,12 +9,6 @@ provider:
         AWS_BUCKET: ${self:custom.bucket}
         APP_STORAGE: /tmp/storage
         BOOTSTRAP_CACHE_PATH: /tmp/bootstrap/cache
-        APP_DEBUG: true
-        APP_SERVICES_CACHE: /tmp/services.php
-        APP_PACKAGES_CACHE: /tmp/packages.php
-        APP_CONFIG_CACHE: /tmp/config.php
-        APP_ROUTES_CACHE: /tmp/routes.php
-        APP_EVENTS_CACHE: /tmp/events.php
     iam:
         role:
             statements:
@@ -60,7 +54,5 @@ package:
         - '!storage/framework/cache/**'
         - '!storage/framework/views/**'
         - '!storage/framework/sessions/**'
-        - '!.env'
-        - '!.env.*'
         - '!.git/**'
         - 'vendor/**'
