@@ -32,15 +32,15 @@ jobs:
         cd ./app
         docker-compose exec -T app /usr/bin/composer install
 
-    # - name: Execute Migration
-    #   run: |
-    #     cd ./app
-    #     docker-compose exec -T app php artisan migrate
+    - name: Execute Migration
+      run: |
+        cd ./app
+        docker-compose exec -T app php artisan migrate
     
-    # - name: Execute Seed
-    #   run: |
-    #     cd ./app
-    #     docker-compose exec -T app php artisan db:seed
+    - name: Execute Seed
+      run: |
+        cd ./app
+        docker-compose exec -T app php artisan db:seed
 
     - name: Run ls
       run: |

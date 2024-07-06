@@ -13,7 +13,7 @@ services:
       POSTGRES_PASSWORD: Password
 
   app:
-    image: bref/php-81-fpm-dev:latest
+    build: .
     ports: [ '8000:8000' ]
     volumes:
         - .:/var/task
