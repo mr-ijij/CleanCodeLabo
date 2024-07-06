@@ -9,6 +9,8 @@
     - .envファイル
 - SERVERLESS_ACCESS_KEY
     - https://app.serverless.com/user/settings/accessKeysのKey
+- CI_ENV_FILE
+    - CI用の.envファイル
 ```
 
 

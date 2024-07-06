@@ -1,0 +1,68 @@
+name: Clean Code CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Create .env file
+      run: |
+        echo "${{ secrets.CI_ENV_FILE }}" > ./app/.env
+
+    - name: Container Build
+      run: |
+        cd ./app
+        docker-compose build
+
+    - name: Container Up
+      run: |
+        cd ./app
+        docker-compose up -d
+
+    - name: Install Composer
+      run: |
+        cd ./app
+        docker-compose exec -T app /usr/bin/composer install
+
+    # - name: Execute Migration
+    #   run: |
+    #     cd ./app
+    #     docker-compose exec -T app php artisan migrate
+    
+    # - name: Execute Seed
+    #   run: |
+    #     cd ./app
+    #     docker-compose exec -T app php artisan db:seed
+
+    - name: Run ls
+      run: |
+        cd ./app
+        docker-compose exec -T app ls
+
+    - name: Run ls
+      run: |
+        cd ./app
+        docker-compose exec -T app pwd
+
+    - name: Run phpcs
+      run: |
+        cd ./app
+        docker-compose exec -T app /usr/bin/composer phpcs
+
+    - name: Run stan
+      run: |
+        cd ./app
+        docker-compose exec -T app /usr/bin/composer stan
+
+    - name: Run PHPUnit tests
+      run: |
+        cd ./app
+        docker-compose exec -T app /var/task/vendor/bin/phpunit

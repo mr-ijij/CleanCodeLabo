@@ -1,2 +1,1 @@
-- [localでの環境構築について](./docs/set-up.md)
-- [デプロイについて](./docs/deploy.md)
+- [脳に収まるコードの書き方 Labo](./app)
