@@ -20,9 +20,12 @@ class ReservationsControllerTest extends TestCase
 
     public function testAdd_有効な予約をポストする(): void
     {
+        /** @var ReservationsRepositoryInterface&\Mockery\MockInterface $mockRepository */
         $mockRepository = Mockery::mock(ReservationsRepositoryInterface::class);
-        $mockRepository->shouldReceive('save')
-            ->once()
+
+        /** @var \Mockery\Expectation $expectation */
+        $expectation = $mockRepository->shouldReceive('save');
+        $expectation->once()
             ->with(
                 Mockery::type(Carbon::class),
                 Mockery::type('string'),
@@ -46,6 +49,8 @@ class ReservationsControllerTest extends TestCase
         $response = $sut->add($request);
 
         $this->assertEquals(201, $response->getStatusCode());
-        $this->assertInstanceOf(Reservation::class, $response->original['data']);
+        /** @var array<mixed> $result */
+        $result = $response->getOriginalContent();
+        $this->assertInstanceOf(Reservation::class, $result['data']);
     }
 }

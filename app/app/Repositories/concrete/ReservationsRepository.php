@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Repositories\Concrete;
@@ -12,24 +13,22 @@ class ReservationsRepository implements ReservationsRepositoryInterface
 {
     public static function create(): self
     {
-        return new self(new ModelsReservation());
+        return new self();
     }
 
-    public function __construct(
-        private ModelsReservation $db
-    ) {
+    public function __construct()
+    {
     }
 
     /**
-     * @return array<string, string>
+     * @return \App\Domains\Reservation
      */
     public function save(
         Carbon $at,
         string $email,
         string $name,
         int $quantity
-    ): Reservation
-    {
+    ): Reservation {
         ModelsReservation::firstOrCreate([
             'at' => $at,
             'email' => $email,

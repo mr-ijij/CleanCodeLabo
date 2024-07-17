@@ -16,7 +16,8 @@ class ReservationsController extends Controller
 
     public function __construct(
         protected ReservationsRepositoryInterface $reservationsRepository,
-    ) {}
+    ) {
+    }
 
     /**
      * @return \Illuminate\Http\JsonResponse
@@ -24,10 +25,10 @@ class ReservationsController extends Controller
     public function add(ReservationRequest $request): JsonResponse
     {
         $result = $this->reservationsRepository->save(
-            Carbon::parse($request->input('date')),
-            $request->input('email'),
-            $request->input('name'),
-            $request->input('quantity')
+            Carbon::parse($request->getDate()),
+            $request->getEmail(),
+            $request->getName(),
+            $request->getQuantity()
         );
 
         return response()->json(

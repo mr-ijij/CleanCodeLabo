@@ -20,4 +20,36 @@ class ReservationRequest extends FormRequest
             'quantity' => 'required|numeric',
         ];
     }
+
+    public function getDate(): string
+    {
+        /** @var string $result */
+        $result = $this->input('date');
+
+        return $result;
+    }
+
+    public function getEmail(): string
+    {
+        /** @var string $result */
+        $result = $this->input('email');
+
+        return $result;
+    }
+
+    public function getName(): string
+    {
+        /** @var string $result */
+        $result = $this->input('name');
+
+        return $result;
+    }
+
+    public function getQuantity(): int
+    {
+        /** @var int $result */
+        $result = $this->input('quantity');
+
+        return $result;
+    }
 }

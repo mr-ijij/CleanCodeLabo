@@ -13,7 +13,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->bind(ReservationsRepositoryInterface::class, function() {
+        $this->app->bind(ReservationsRepositoryInterface::class, function () {
             return ReservationsRepository::create();
         });
     }
