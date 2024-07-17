@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HelloWorldController;
+use App\Http\Controllers\ReservationsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,4 +21,8 @@ Route::middleware('auth:sanctum')->group(function() {
 
 Route::controller(HelloWorldController::class)->group(function () {
     Route::get('/hello-world', 'index');
+});
+
+Route::controller(ReservationsController::class)->group(function () {
+    Route::post('/reservations', 'add');
 });
