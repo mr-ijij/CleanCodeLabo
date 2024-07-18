@@ -22,7 +22,5 @@ services:
       HANDLER: public/index.php
       DOCUMENT_ROOT: public
       LAMBDA_TASK_ROOT: /var/task
-    env_file:
-      - .env
 volumes:
   postgres_data:
