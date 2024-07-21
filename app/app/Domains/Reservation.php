@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Domains;
 
 use Carbon\Carbon;
+use DomainException;
 
 class Reservation
 {
@@ -20,6 +21,9 @@ class Reservation
         private string $name,
         private int $quantity
     ) {
+        if ($quantity < 1) {
+            throw new DomainException('Invalid quantity');
+        }
     }
 
     public function getAt(): Carbon
