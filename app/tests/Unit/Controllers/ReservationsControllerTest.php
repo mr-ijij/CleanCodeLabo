@@ -33,7 +33,7 @@ class ReservationsControllerTest extends TestCase
                 Mockery::type('int')
             )
             ->andReturn(new Reservation(
-                Carbon::parse('2023-07-08'),
+                Carbon::parse('2023-07-08 19:00'),
                 'test@example.com',
                 'Test User',
                 2
